@@ -46,7 +46,16 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Script\rotatejs.js" />
+     <Compile Include="Assets\ObjReader\Demo Scripts\Example1-TextAsset.js" />
+     <Compile Include="Assets\ObjReader\Demo Scripts\Example2-WWW.js" />
+     <Compile Include="Assets\ObjReader\Demo Scripts\Example3-ExternalFile.js" />
+     <None Include="Assets\JSON\readme.txt" />
+     <None Include="Assets\ObjReader\Sample Files\Spot_obj.txt" />
+     <None Include="Assets\ObjReader\Sample Files\Pig_obj.txt" />
+     <None Include="Assets\ObjReader\Sample Files\Car_obj.txt" />
+     <None Include="Assets\ObjReader\Sample Files\Car_mtl.txt" />
+     <None Include="Assets\ObjReader\Sample Files\Spot_mtl.txt" />
+     <None Include="Assets\ObjReader\Sample Files\Pig_mtl.txt" />
  <Reference Include="UnityEngine.Analytics">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
@@ -59,6 +68,10 @@
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>/Applications/Unity/Unity.app/Contents/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
  </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{60C5640D-9EFA-3BB1-BBF0-43715A823474}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
