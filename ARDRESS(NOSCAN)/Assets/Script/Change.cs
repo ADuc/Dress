@@ -3,12 +3,26 @@ using System.Collections;
 
 public class Change : MonoBehaviour {
 
+	public GameObject Loadbutton, LoadPanel;
 	static int numberObject = 4;
 	public GameObject[] ADress = new GameObject[numberObject];
 	public GameObject[] Text = new GameObject[3];
 	//public GameObject[] Button = new GameObject[numberObject];
 	//public GameObject a = new GameObject();
-	
+
+	public void Load()
+	{
+		LoadPanel.SetActive (true);
+		Time.timeScale = 0;
+	}
+
+	public void ExitPanel()
+	{
+		LoadPanel.SetActive (false);
+		Time.timeScale = 1;
+	}
+
+
 	public void ChangeDress(int j)
 	{
 		string name;
@@ -50,7 +64,9 @@ public class Change : MonoBehaviour {
 		ChangeDress(i);
 		//ChangeButton(i);
 	}
-	
+
+
+
 	/*
     int j = 0;
     public void changeObjLeft()
