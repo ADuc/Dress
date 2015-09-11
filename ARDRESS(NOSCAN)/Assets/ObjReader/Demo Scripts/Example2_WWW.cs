@@ -45,6 +45,15 @@ public class Example2_WWW : MonoBehaviour {
 		}
 		
 		loadingText = "Import completed";
+		GameObject objecLoad = GameObject.Find ("material0");
+		GameObject model = GameObject.Find ("GameObjectModel").transform.FindChild("header").FindChild("default").gameObject;
+		model.GetComponent<MeshFilter> ().mesh = objecLoad.GetComponent<MeshFilter> ().mesh;
+		model.GetComponent<MeshRenderer> ().material = objecLoad.GetComponent<MeshRenderer> ().material;
+		model.transform.position = new Vector3(model.transform.position.x-0.5f,model.transform.position.y,model.transform.position.z);
+		objecLoad.SetActive (false);
+		objecLoad = GameObject.Find ("material0");
+		if(objecLoad != null)
+			objecLoad.SetActive (false);
 		//FocusOnObjects();
 	}
 	
