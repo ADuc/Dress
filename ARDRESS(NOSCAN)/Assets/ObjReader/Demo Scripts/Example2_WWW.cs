@@ -6,19 +6,26 @@ using System.Collections;
 public class Example2_WWW : MonoBehaviour {
 
 	public string objFileName = "http://www.starscenesoftware.com/objtest/Spot.obj";
+	public string URL_API = "http://54.255.197.148/contents/";
 	public Material standardMaterial;	// Used if the OBJ file has no MTL file
 	ObjReader.ObjData objData;
 	string loadingText = "";
 	bool loading = false;
 
-	IEnumerator Load () {
+	public IEnumerator Load (string objName, string mtlName, string pngName) {
+		Debug.Log (" ------------------------------------------- " + objName + ", " + mtlName + ", " + pngName);
 		loading = true;
 		if (objData != null && objData.gameObjects != null) {
 			for (var i = 0; i < objData.gameObjects.Length; i++) {
 				Destroy (objData.gameObjects[i]);
 			}
 		}
-		
+		if(!mtlName.Equals("") && !pngName.Equals("")) {
+			objFileName = URL_API + objName;
+			objData = ObjReader.use.ConvertFileAsync (objFileName, true, standardMaterial, mtlName, pngName);
+		} else {
+			objData = ObjReader.use.ConvertFileAsync (objFileName, true, standardMaterial);
+		}
 		objData = ObjReader.use.ConvertFileAsync (objFileName, true, standardMaterial);
 		while (!objData.isDone) {
 			loadingText = "Loading... " + (objData.progress*100).ToString("f0") + "%";
@@ -43,11 +50,11 @@ public class Example2_WWW : MonoBehaviour {
 	
 	void OnGUI () {
 		GUILayout.BeginArea (new Rect(10, 10, 400, 400));
-		objFileName = GUILayout.TextField (objFileName, GUILayout.Width(400));
+		/*objFileName = GUILayout.TextField (objFileName, GUILayout.Width(400));
 		GUILayout.Label ("Also try pig.obj, car.obj, and cube.obj");
 		if (GUILayout.Button ("Import") && !loading) {
-			StartCoroutine (Load());
-		}
+			StartCoroutine (Load("", "", ""));
+		}*/
 		GUILayout.Label (loadingText);
 		GUILayout.EndArea();
 	}

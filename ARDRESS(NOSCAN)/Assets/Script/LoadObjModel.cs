@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class LoadObjModel : MonoBehaviour {
-	List<ObjModel> listObjModel = new List<ObjModel>(); 
-	List<GameObject> listButton = new List<GameObject>();
+	public static List<ObjModel> listObjModel = new List<ObjModel>(); 
 	string URL = "http://54.255.197.148/api/v1/contents";
 	// Use this for initialization
 	void Start () {
@@ -22,12 +21,7 @@ public class LoadObjModel : MonoBehaviour {
 		}
 	}
 
-	void buttonSetup(Button button) {
 
-		//button.onClick.RemoveAllListeners();
-		//Add your new event
-		//button.onClick.AddListener(() => handleButton(button));
-	}
 	string key = "";
 	GameObject objButton = null;
 	GameObject button = null;
@@ -46,10 +40,11 @@ public class LoadObjModel : MonoBehaviour {
 				objButton = GameObject.Instantiate(button, transform.position, transform.rotation) as GameObject;
 				objButton.transform.SetParent(transform);
 				objButton.transform.localScale = transform.localScale;
+				objButton.name = listObjModel.Count.ToString();
 				ParserData(j);
 			}
 			break;
-		case JSONObject.Type.STRING:
+		case JSONObject.Type.STRING:	
 			if(key.Equals("name")) {
 				listObjModel[listObjModel.Count - 1].Name = obj.str;
 				objButton.transform.FindChild("Text").GetComponent<Text>().text = obj.str;

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class Change : MonoBehaviour {
 
@@ -7,9 +8,12 @@ public class Change : MonoBehaviour {
 	static int numberObject = 4;
 	public GameObject[] ADress = new GameObject[numberObject];
 	public GameObject[] Text = new GameObject[3];
+	private Example2_WWW objGetModel;
 	//public GameObject[] Button = new GameObject[numberObject];
 	//public GameObject a = new GameObject();
-
+	void Start () {
+		objGetModel = GameObject.Find ("ObjectManager").GetComponent<Example2_WWW> ();
+	}
 	public void Load()
 	{
 		LoadPanel.SetActive (true);
@@ -66,9 +70,14 @@ public class Change : MonoBehaviour {
 	}
 
 
-	public void SelectModel(int index)
+
+	public void SelectModel(GameObject bt)
 	{
-		Debug.Log ("Select model"+index);
+		ExitPanel ();
+		ObjModel objModel = LoadObjModel.listObjModel [Convert.ToInt32 (bt.name)];
+		int begin = 10;
+		StartCoroutine(objGetModel.Load (objModel.Obj.Substring(begin), objModel.Mtl.Substring(begin), objModel.Png.Substring(begin)));
+		//StartCoroutine (objGetModel.Load ("", "", ""));
 	}
 	/*
     int j = 0;

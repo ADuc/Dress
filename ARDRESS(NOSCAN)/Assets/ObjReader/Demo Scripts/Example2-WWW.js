@@ -3,6 +3,11 @@
 #pragma strict
 
 var objFileName = "http://www.starscenesoftware.com/objtest/Spot.obj";
+//var objFileName = "http://54.255.197.148/contents/dee20bb1783f8c2532284e63075f5eaeaf757d74.obj";
+private var URL_API = "http://54.255.197.148/contents/";
+private var objName = "d27e2a6e06b167417785c43b9fecae01544182cf.obj";
+private var mtlName = "6c7d422e96494dde2b56ff2e10dddda62089a6d2.mtl";
+private var pngName = "ad43ca70d8562da5fa89eccbd76ee936b502cdaa.jpg";
 var standardMaterial : Material;	// Used if the OBJ file has no MTL file
 private var objData : ObjReader.ObjData;
 private var loadingText = "";
@@ -15,8 +20,12 @@ function Load () {
 			Destroy (objData.gameObjects[i]);
 		}
 	}
-	
-	objData = ObjReader.use.ConvertFileAsync (objFileName, true, standardMaterial);
+	if(!mtlName.Equals("") && !pngName.Equals("")) {
+		objFileName = URL_API + objName;
+		objData = ObjReader.use.ConvertFileAsync (objFileName, true, standardMaterial, mtlName, pngName);
+	} else {
+		objData = ObjReader.use.ConvertFileAsync (objFileName, true, standardMaterial);
+	}
 	while (!objData.isDone) {
 		loadingText = "Loading... " + (objData.progress*100).ToString("f0") + "%";
 		if (Input.GetKeyDown (KeyCode.Escape)) {
