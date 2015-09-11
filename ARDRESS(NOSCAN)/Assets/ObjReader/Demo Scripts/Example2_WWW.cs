@@ -45,7 +45,7 @@ public class Example2_WWW : MonoBehaviour {
 		}
 		
 		loadingText = "Import completed";
-		FocusOnObjects();
+		//FocusOnObjects();
 	}
 	
 	void OnGUI () {
