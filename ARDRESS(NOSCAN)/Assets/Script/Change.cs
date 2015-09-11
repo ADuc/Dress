@@ -66,7 +66,10 @@ public class Change : MonoBehaviour {
 	}
 
 
-
+	public void SelectModel(int index)
+	{
+		Debug.Log ("Select model"+index);
+	}
 	/*
     int j = 0;
     public void changeObjLeft()
