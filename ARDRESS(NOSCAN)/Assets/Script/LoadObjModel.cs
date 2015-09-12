@@ -12,7 +12,6 @@ public class LoadObjModel : MonoBehaviour {
 		button = gameObject.transform.FindChild ("Button").gameObject;
 		button.SetActive (false);
 		WWW www = new WWW(URL);
-		//while (!www.isDone) ;
 		yield return www;
 		if (www.error != null) {
 			Debug.Log(www.error);
@@ -43,7 +42,11 @@ public class LoadObjModel : MonoBehaviour {
 				objButton = GameObject.Instantiate(button, transform.position, transform.rotation) as GameObject;
 				objButton.transform.SetParent(transform);
 				objButton.transform.localScale = transform.localScale;
-				objButton.name = listObjModel.Count.ToString();
+				int count = listObjModel.Count;
+				Color color =  Color.red; 
+				Color.TryParseHexString("#E1E1E1", out color);
+				if(count % 2 == 0) objButton.GetComponent<Image>().color = color;
+				objButton.name = count.ToString();
 				objButton.SetActive(true);
 				ParserData(j);
 			}

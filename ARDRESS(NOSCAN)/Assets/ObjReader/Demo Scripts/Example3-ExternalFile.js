@@ -11,8 +11,8 @@ function Start () {
 	loadingText.text = "Loading...";
 	yield;
 	
-	objFileName = Application.dataPath + "/ObjReader/Sample Files/" + objFileName;
-	
+	//objFileName = Application.dataPath + "/ObjReader/Sample Files/" + objFileName;
+	objFileName = "E:/Projects/Self_scan/Dress/ARDRESS(NOSCAN)/ExportedObj/default.obj";
 	ObjReader.use.ConvertFile (objFileName, true, standardMaterial, transparentMaterial);
 	
 	loadingText.enabled = false;
