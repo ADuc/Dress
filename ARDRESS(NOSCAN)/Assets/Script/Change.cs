@@ -89,32 +89,9 @@ public class Change : MonoBehaviour {
 		ObjModel objModel = LoadObjModel.listObjModel [Convert.ToInt32 (bt.name)];
 		int begin = 10;
 		StartCoroutine(objGetModel.Load (objModel.Obj.Substring(begin), objModel.Mtl.Substring(begin), objModel.Png.Substring(begin)));
-		//StartCoroutine (objGetModel.Load ("", "", ""));
 	}
-	/*
-    int j = 0;
-    public void changeObjLeft()
-    {
-        Adress[j].active = false;
-        j = (int)Mathf.Round((j - 1) % 3);
-        Debug.Log(j);
-        Adress[j].active = true;
-    }
-    public void changeObjRight()
-    {
-        Adress[j].active = false;
-        j = (int)Mathf.Round((j + 1) % 3);
-        Debug.Log(j);
-        Adress[j].active = true;
-    }
 
-    static void DisableActive(GameObject[] Dress)
-    {
-        for (int i = 0; i < numberObject; i++)
-        {
-            Dress[i].active = false;
-        }
-    }
-     * */
-
+	public void SaveObj(GameObject obj) {
+		EditorObjExporter.ExportEachToSingle (obj);
+	}
 }
