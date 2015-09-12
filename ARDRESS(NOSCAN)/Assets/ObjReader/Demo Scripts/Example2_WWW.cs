@@ -2,6 +2,7 @@
 
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Example2_WWW : MonoBehaviour {
 
@@ -11,9 +12,16 @@ public class Example2_WWW : MonoBehaviour {
 	ObjReader.ObjData objData;
 	string loadingText = "";
 	bool loading = false;
+	public GameObject lableLoading;
+	Change c;
 
+	void Start () {
+
+
+	}
 	public IEnumerator Load (string objName, string mtlName, string pngName) {
 		Debug.Log (" ------------------------------------------- " + objName + ", " + mtlName + ", " + pngName);
+		c = GameObject.Find ("Canvas").GetComponent<Change> ();
 		loading = true;
 		if (objData != null && objData.gameObjects != null) {
 			for (var i = 0; i < objData.gameObjects.Length; i++) {
@@ -33,39 +41,52 @@ public class Example2_WWW : MonoBehaviour {
 				objData.Cancel();
 				loadingText = "Cancelled download";
 				loading = false;
+				loadingText = "Error loading file";
+				c.ExitPanel ();
 				yield break;
 			}
 			yield return null;
 		}
 		loading = false;
+
 		if (objData == null || objData.gameObjects == null) {
 			loadingText = "Error loading file";
+			c.ExitPanel ();
 			yield return null;
 			yield break;
 		}
-		
+
+		//GameObject loadtext = GameObject.Find ("Canvas").transform.FindChild ("PanelPopupLoad").FindChild ("LoadText").gameObject;
+
 		loadingText = "Import completed";
 		GameObject objecLoad = GameObject.Find ("material0");
 		GameObject model = GameObject.Find ("GameObjectModel").transform.FindChild("header").FindChild("default").gameObject;
 		model.GetComponent<MeshFilter> ().mesh = objecLoad.GetComponent<MeshFilter> ().mesh;
 		model.GetComponent<MeshRenderer> ().material = objecLoad.GetComponent<MeshRenderer> ().material;
-		model.transform.position = new Vector3(model.transform.position.x-0.5f,model.transform.position.y,model.transform.position.z);
-		objecLoad.SetActive (false);
+		model.transform.position = new Vector3(model.transform.position.x,model.transform.position.y,model.transform.position.z);
+		c.ExitPanel ();
+		Destroy (objecLoad);
 		objecLoad = GameObject.Find ("material0");
 		if(objecLoad != null)
-			objecLoad.SetActive (false);
+			Destroy (objecLoad);
 		//FocusOnObjects();
 	}
-	
+
+
+
+
+
 	void OnGUI () {
-		GUILayout.BeginArea (new Rect(10, 10, 400, 400));
-		/*objFileName = GUILayout.TextField (objFileName, GUILayout.Width(400));
+		if(lableLoading != null)
+			lableLoading.GetComponent<Text>().text = loadingText;
+		/*GUILayout.BeginArea (new Rect(10, 10, 400, 400));
+		objFileName = GUILayout.TextField (objFileName, GUILayout.Width(400));
 		GUILayout.Label ("Also try pig.obj, car.obj, and cube.obj");
 		if (GUILayout.Button ("Import") && !loading) {
 			StartCoroutine (Load("", "", ""));
-		}*/
+		}
 		GUILayout.Label (loadingText);
-		GUILayout.EndArea();
+		GUILayout.EndArea();*/
 	}
 	
 	void FocusOnObjects () {

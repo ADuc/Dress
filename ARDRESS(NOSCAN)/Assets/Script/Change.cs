@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Change : MonoBehaviour {
 
-	public GameObject Loadbutton, LoadPanel;
+	public GameObject LoadPanel;
 	static int numberObject = 4;
 	public GameObject[] ADress = new GameObject[numberObject];
 	public GameObject[] Text = new GameObject[3];
@@ -18,7 +18,9 @@ public class Change : MonoBehaviour {
 	public void Load()
 	{
 		LoadPanel.SetActive (true);
+		LoadPanel.transform.FindChild ("PanelLoad").gameObject.SetActive (true);
 		Time.timeScale = 0;
+
 	}
 
 	public void ExitPanel()
@@ -85,7 +87,8 @@ public class Change : MonoBehaviour {
 		}
 		bt.transform.FindChild("imgCheck").gameObject.GetComponent<Image>().overrideSprite = (Sprite)Resources.Load<Sprite>("Checkicon");
 		lastModel = bt;
-		ExitPanel ();
+		LoadPanel.transform.FindChild ("PanelLoad").gameObject.SetActive (false);
+
 		ObjModel objModel = LoadObjModel.listObjModel [Convert.ToInt32 (bt.name)];
 		int begin = 10;
 		StartCoroutine(objGetModel.Load (objModel.Obj.Substring(begin), objModel.Mtl.Substring(begin), objModel.Png.Substring(begin)));

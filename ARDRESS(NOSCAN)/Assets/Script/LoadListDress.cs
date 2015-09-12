@@ -6,9 +6,10 @@ using System.Collections.Generic;
 public class LoadListDress : MonoBehaviour {
 	private GameObject objBtDress = null;
 	private int num = 10;
-	public static List<GameObject> listCheck = new List<GameObject>();
+	public static List<GameObject> listCheck;
 	// Use this for initialization
 	void Start () {
+		listCheck = new List<GameObject>();
 		objBtDress = transform.FindChild ("ButtonDress").gameObject;
 		GameObject pnDress1 = transform.FindChild ("PanelMask1").transform.FindChild ("PanelDress1").gameObject;
 		GameObject pnDress2 = transform.FindChild ("PanelMask2").transform.FindChild ("PanelDress2").gameObject;

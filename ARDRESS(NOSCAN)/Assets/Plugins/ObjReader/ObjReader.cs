@@ -374,6 +374,7 @@ public class ObjReader : MonoBehaviour {
 			}
 		}
 		catch (System.Exception err) {
+			GameObject.Find("Canvas").transform.FindChild("PanelPopupLoad").gameObject.SetActive(false);
 			Debug.LogError (err.Message);
 			return null;
 		}
