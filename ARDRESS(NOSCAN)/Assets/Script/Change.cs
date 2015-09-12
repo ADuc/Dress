@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.UI;
 
 public class Change : MonoBehaviour {
 
@@ -62,17 +63,28 @@ public class Change : MonoBehaviour {
 			}
 		}
 	}
-	
-	public void ChoseButton(int i)
+
+	private int lastIndexDress = -1;
+	public void ChoseDress(GameObject obj)
 	{
-		ChangeDress(i);
-		//ChangeButton(i);
+		if (lastIndexDress != -1) {
+			LoadListDress.listCheck[lastIndexDress].SetActive(false);
+		}
+		int currindex = Convert.ToInt32 (obj.name);
+		LoadListDress.listCheck[currindex].SetActive(true);
+		lastIndexDress = currindex;
+		ChangeDress(currindex);
 	}
 
 
-
+	private GameObject lastModel;
 	public void SelectModel(GameObject bt)
 	{
+		if (lastModel != null) {
+			lastModel.transform.FindChild("imgCheck").gameObject.GetComponent<Image>().overrideSprite = (Sprite)Resources.Load<Sprite>("UnCheckicon");
+		}
+		bt.transform.FindChild("imgCheck").gameObject.GetComponent<Image>().overrideSprite = (Sprite)Resources.Load<Sprite>("Checkicon");
+		lastModel = bt;
 		ExitPanel ();
 		ObjModel objModel = LoadObjModel.listObjModel [Convert.ToInt32 (bt.name)];
 		int begin = 10;

@@ -6,16 +6,19 @@ using UnityEngine.UI;
 public class LoadObjModel : MonoBehaviour {
 	public static List<ObjModel> listObjModel = new List<ObjModel>(); 
 	string URL = "http://54.255.197.148/api/v1/contents";
+
 	// Use this for initialization
-	void Start () {
+	IEnumerator Start () {
+		button = gameObject.transform.FindChild ("Button").gameObject;
+		button.SetActive (false);
 		WWW www = new WWW(URL);
-		while (!www.isDone) ;
-		if (!string.IsNullOrEmpty(www.error)) {
+		//while (!www.isDone) ;
+		yield return www;
+		if (www.error != null) {
 			Debug.Log(www.error);
 		} else {
-			JSONObject jsonObject = new JSONObject(www.text);
+			JSONObject jsonObject = new JSONObject(www.data);
 			JSONObject jsonData = jsonObject.GetField("data");
-			button = gameObject.transform.FindChild ("Button").gameObject;
 			ParserData(jsonData);
 			button.SetActive(false);
 		}
@@ -41,6 +44,7 @@ public class LoadObjModel : MonoBehaviour {
 				objButton.transform.SetParent(transform);
 				objButton.transform.localScale = transform.localScale;
 				objButton.name = listObjModel.Count.ToString();
+				objButton.SetActive(true);
 				ParserData(j);
 			}
 			break;
