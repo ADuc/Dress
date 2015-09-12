@@ -12,7 +12,7 @@ function Start () {
 	yield;
 	
 	//objFileName = Application.dataPath + "/ObjReader/Sample Files/" + objFileName;
-	objFileName = "E:/Projects/Self_scan/Dress/ARDRESS(NOSCAN)/ExportedObj/default.obj";
+	objFileName = Application.dataPath + "/ExportedObj/default.obj";
 	ObjReader.use.ConvertFile (objFileName, true, standardMaterial, transparentMaterial);
 	
 	loadingText.enabled = false;

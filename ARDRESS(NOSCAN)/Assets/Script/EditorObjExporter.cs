@@ -8,7 +8,7 @@ same folder.
 N.B. there may be a bug so if the custom option doesn't come up refer to this thread http://answers.unity3d.com/questions/317951/how-to-use-editorobjexporter-obj-saving-script-fro.html */
 
 using UnityEngine;
-using UnityEditor;
+//using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -77,7 +77,7 @@ public class EditorObjExporter : ScriptableObject
 				objMaterial.name = mats[material].name;
 				
 				if (mats[material].mainTexture)
-					objMaterial.textureName = EditorUtility.GetAssetPath(mats[material].mainTexture);
+					objMaterial.textureName = "";//EditorUtility.GetAssetPath(mats[material].mainTexture);
 				else 
 					objMaterial.textureName = null;
 				
@@ -210,14 +210,14 @@ public class EditorObjExporter : ScriptableObject
 		}
 		catch
 		{
-			EditorUtility.DisplayDialog("Error!", "Failed to create target folder!", "");
+			//EditorUtility.DisplayDialog("Error!", "Failed to create target folder!", "");
 			return false;
 		}
 		
 		return true;
 	}
 	
-	[MenuItem ("Custom/Export/Export all MeshFilters in selection to separate OBJs")]
+	/*[MenuItem ("Custom/Export/Export all MeshFilters in selection to separate OBJs")]
 	static void ExportSelectionToSeparate()
 	{
 		if (!CreateTargetFolder())
@@ -345,7 +345,7 @@ public class EditorObjExporter : ScriptableObject
 		}
 		else
 			EditorUtility.DisplayDialog("Objects not exported", "Make sure at least some of your selected objects have mesh filters!", "");
-	}	
+	}	*/
 
 	public static void ExportEachToSingle(GameObject obj){
 		if (!CreateTargetFolder())

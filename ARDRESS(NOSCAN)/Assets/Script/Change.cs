@@ -95,6 +95,7 @@ public class Change : MonoBehaviour {
 	}
 
 	public void SaveObj(GameObject obj) {
+		Application.LoadLevel(0);
 		EditorObjExporter.ExportEachToSingle (obj);
 	}
 }
